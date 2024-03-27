@@ -1,0 +1,77 @@
+# Postman Documentation
+
+## Usage
+
+1. Start the server locally and open the following URL in your postman tool:
+   - URL: [http://localhost:3000(following endpoint)](http://localhost:3000(following endpoint))
+
+## Endpoints
+
+### POST /api/v1/fooddeliveryapp/calculate-cost
+
+This endpoint calculates the total price based on the distance beyond the base distance and the item type.
+
+#### Request
+
+- Method: POST
+- Path: /api/v1/fooddeliveryapp/calculate-cost
+- Body: JSON object with the following parameters:
+  ```json
+  {
+    "zone": "central",
+    "organization_id": 1,
+    "total_distance": 12,
+    "item_type": "perishable"
+  }
+
+Response
+Status: 200 OK
+Body: JSON object containing the total_price for the delivery.
+
+Example : 
+
+Request : parameters in json formate
+{
+    "zone": "central",
+    "organization_id": 1,
+    "total_distance": 12,
+    "item_type": "perishable"
+}
+
+Response : 
+
+{
+    "total_price": 20.5
+}
+
+#### GET /api/v1/fooddeliveryapp/
+This endpoint retrieves all the price details.
+
+Request
+Method: GET
+Path: /api/v1/fooddeliveryapp/
+Response
+Status: 200 OK
+Body: JSON array containing all the price details.
+
+example: 
+
+response: 
+[
+    {
+        "organization_id": 1,
+        "item_id": 1,
+        "zone": "central",
+        "base_distance_in_km": 5,
+        "km_price": "1.50",
+        "fix_price": "10.00"
+    },
+    {
+        "organization_id": 1,
+        "item_id": 2,
+        "zone": "central",
+        "base_distance_in_km": 5,
+        "km_price": "1.00",
+        "fix_price": "10.00"
+    }
+]
