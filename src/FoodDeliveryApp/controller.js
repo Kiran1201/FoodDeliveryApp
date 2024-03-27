@@ -2,6 +2,14 @@ const pool = require('../../dataBase');
 const queries = require('./queries');
 
 
+const getPriceDetails = (req, res) => {
+    pool.query(queries.getPriceDetails, (error, results) => {
+        if (error) throw error;
+        res.status(200).json(results.rows);
+    })
+};
+
+
 const calculateDeliveryCost = (req, res) => {
     let { zone, organization_id, total_distance, item_type } = req.body;
 
@@ -33,4 +41,5 @@ const calculateDeliveryCost = (req, res) => {
 
 module.exports = {
     calculateDeliveryCost,
+    getPriceDetails,
 }

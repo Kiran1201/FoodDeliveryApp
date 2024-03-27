@@ -31,6 +31,28 @@
  *         total_price:
  *           type: number
  *           description: The total delivery cost in euros.
+ * 
+ *     PricingInfo:
+ *       type: object
+ *       properties:
+ *         organization_id:
+ *           type: integer
+ *           description: The Delivery organization ID.
+ *         item_id:
+ *           type: integer
+ *           description: The ID of the item.
+ *         zone:
+ *           type: string
+ *           description: The delivery zone.
+ *         base_distance_in_km:
+ *           type: integer
+ *           description: The base distance for pricing calculations (in kilometers).
+ *         km_price:
+ *           type: number
+ *           description: The price per kilometer for deliveries within this zone.
+ *         fix_price:
+ *           type: number
+ *           description: The fixed price for deliveries within this zone.
  */
 
 const { Router } = require("express");
@@ -60,5 +82,23 @@ const router = Router();
  *               $ref: '#/components/schemas/DeliveryResponse'
  */
 router.post("/calculate-cost", controller.calculateDeliveryCost);
+
+
+
+/**
+ * @swagger
+ * /api/v1/fooddeliveryapp/:
+ *   get:
+ *     summary: Get price details
+ *     description: Retrieve details of pricing for food delivery.
+ *     responses:
+ *       200:
+ *         description: Successful response with pricing details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/PricingInfo'
+ */
+router.get("/", controller.getPriceDetails);
 
 module.exports = router;
